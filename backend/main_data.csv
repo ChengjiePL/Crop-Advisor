@@ -1,40 +1,39 @@
 Crop Type,Temparature,Humidity,Moisture,Soil Type,Nitrogen,Potassium,Phosphorous,Month,Description,Image Link,Growth Period,Water Needs
-Tomate,27.0,60.0,40.0,Franco,20,10,15,3,Cultivo de temporada cálida que crece bien en suelo franco bien drenado,https://example.com/tomato.jpg,50-80,1200
-Arroz,30.0,80.0,70.0,Arcilloso,40,20,30,6,Alimento básico que prospera en condiciones inundadas,https://example.com/rice.jpg,90-150,5000
-Zanahoria,22.0,55.0,30.0,Arenoso,15,10,20,10,Un vegetal de raíz que requiere suelo suelto y arenoso,https://example.com/carrot.jpg,60-80,800
-Girasol,28.0,50.0,35.0,Negro,25,30,10,7,Cultivo resistente conocido por sus semillas ricas en aceite,https://example.com/sunflower.jpg,70-100,1000
-Café,24.0,75.0,60.0,Rojo,35,20,25,5,Planta tropical que prospera en climas húmedos,https://example.com/coffee.jpg,700-1000,2200
-Papa,18.0,65.0,50.0,Franco,30,15,20,9,Cultivo de tubérculo que requiere suelo bien drenado,https://example.com/potato.jpg,90-120,1500
-Uvas,26.0,55.0,45.0,Arcilloso,18,25,15,4,Cultivo frutal adecuado para vinificación y consumo fresco,https://example.com/grapes.jpg,150-180,600
-Algodón,32.0,60.0,40.0,Negro,50,30,20,8,Cultivo comercial utilizado en la industria textil,https://example.com/cotton.jpg,160-180,2500
-Té,20.0,85.0,75.0,Rojo,40,10,35,11,Cultivo delicado que se cultiva en regiones de gran altitud y humedad,https://example.com/tea.jpg,730-1460,2000
-Soja,29.0,58.0,38.0,Franco,28,22,18,5,Legumbre rica en proteína utilizada para producción de aceite y alimentos,https://example.com/soybean.jpg,80-120,1000
-Maíz,30.0,65.0,50.0,Franco,35,15,25,6,Grano básico ampliamente cultivado en América Latina,https://example.com/corn.jpg,60-100,1200
-Cacao,26.0,85.0,70.0,Rojo,40,25,35,10,Cultivo tropical utilizado en la producción de chocolate,https://example.com/cacao.jpg,1200-1500,2500
-Aguacate,24.0,70.0,60.0,Franco,30,20,15,3,Fruta nutritiva ampliamente cultivada en América Latina,https://example.com/avocado.jpg,1000-1500,2000
-Piña,27.0,75.0,55.0,Rojo,25,18,20,7,Fruta tropical conocida por su dulzura,https://example.com/pineapple.jpg,540-730,1000
-Plátano,28.0,80.0,65.0,Arcilloso,35,30,25,6,Fruta ampliamente consumida que prospera en climas húmedos,https://example.com/banana.jpg,270-360,1800
-Yuca,29.0,60.0,50.0,Arenoso,20,15,10,4,Cultivo de raíz resistente a la sequía,https://example.com/cassava.jpg,240-365,600
-Quinua,22.0,50.0,40.0,Franco,15,10,12,5,Grano andino alto en proteínas,https://example.com/quinoa.jpg,90-120,500
-Papaya,30.0,75.0,50.0,Rojo,28,25,18,8,Fruta tropical rica en vitaminas,https://example.com/papaya.jpg,150-180,1000
-Mango,32.0,65.0,40.0,Franco,30,20,15,1,Fruta tropical jugosa popular en América Latina,https://example.com/mango.jpg,100-150,1200
-Ají,26.0,55.0,35.0,Arenoso,20,18,12,3,Fruto picante utilizado en muchos platos latinoamericanos,https://example.com/chili_pepper.jpg,60-90,800
-Frijoles Negros,25.0,60.0,40.0,Franco,35,20,15,9,Leguminosa básica en la cocina latinoamericana,https://example.com/black_beans.jpg,70-90,900
-Lentejas,24.0,55.0,38.0,Arcilloso,28,15,10,4,Leguminosa nutritiva rica en proteínas,https://example.com/lentils.jpg,100-110,600
-Maní,27.0,50.0,45.0,Arenoso,25,20,18,5,Leguminosa cultivada por sus semillas comestibles,https://example.com/peanuts.jpg,90-120,700
-Camote,26.0,65.0,50.0,Franco,20,18,22,10,Tubérculo nutritivo rico en fibra,https://example.com/sweet_potato.jpg,90-150,900
-Nopal,30.0,50.0,35.0,Arenoso,15,10,12,3,Planta cactácea utilizada en gastronomía mexicana,https://example.com/nopal.jpg,60-90,300
-Chirimoya,22.0,70.0,40.0,Franco,18,15,10,4,Fruta tropical de sabor dulce y cremoso,https://example.com/chirimoya.jpg,180-300,1200
-Ciruelo,24.0,55.0,35.0,Franco,20,18,15,5,Fruta jugosa y dulce,https://example.com/ciruelo.jpg,100-150,1000
-Guaraná,28.0,80.0,60.0,Arcilloso,25,20,20,6,Fruta utilizada en bebidas energéticas,https://example.com/guarana.jpg,365-730,2000
-Yerba Mate,26.0,75.0,55.0,Rojo,30,20,25,7,Planta utilizada para infusión típica de Sudamérica,https://example.com/yerba_mate.jpg,730-1460,2500
-Cebolla,20.0,65.0,40.0,Franco,18,12,10,9,Hortaliza de bulbo utilizada en cocina,https://example.com/cebolla.jpg,90-120,700
-Ajo,22.0,60.0,35.0,Arenoso,15,10,12,10,Planta aromática con usos culinarios y medicinales,https://example.com/ajo.jpg,150-210,500
-Pepino,25.0,70.0,45.0,Franco,20,15,12,5,Hortaliza fresca utilizada en ensaladas,https://example.com/pepino.jpg,50-70,600
-Higo,30.0,50.0,30.0,Arenoso,25,15,10,6,Fruta dulce y fibrosa,https://example.com/higo.jpg,120-150,800
-Cilantro,18.0,65.0,35.0,Franco,15,10,8,11,Hierba aromática utilizada en cocina,https://example.com/cilantro.jpg,30-50,400
-Judía,24.0,60.0,40.0,Franco,30,20,15,4,Legumbre popular en diversas cocinas latinoamericanas,https://example.com/judia.jpg,60-90,800
-Trigo,20.0,55.0,35.0,Franco,25,18,12,6,Cereal ampliamente cultivado para la producción de harina,https://example.com/trigo.jpg,120-150,1000
-Cebada,18.0,50.0,30.0,Arcilloso,22,15,10,5,Cereal resistente utilizado en panadería y cervecería,https://example.com/cebada.jpg,90-120,900
-Chía,26.0,45.0,30.0,Arenoso,20,12,10,3,Semilla rica en omega-3 y fibra,https://example.com/chia.jpg,100-150,600
-Guaraná,28.0,80.0,60.0,Arcilloso,25,20,20,7,Fruta utilizada en bebidas energéticas,https://example.com/guarana.jpg,365-730,2000
+Tomate,27,60,40,Franco,20,10,15,3,Cultivo de temporada cálida que crece bien en suelo franco bien drenado,https://images.unsplash.com/photo-1596199050105-6d5d32222916?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,50-80,1200
+Arroz,30,80,70,Arcilloso,40,20,30,6,Alimento básico que prospera en condiciones inundadas,https://images.unsplash.com/photo-1635562985686-4f8bb9c0d3bf?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,90-150,5000
+Zanahoria,22,55,30,Arenoso,15,10,20,10,Un vegetal de raíz que requiere suelo suelto y arenoso,https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,60-80,800
+Girasol,28,50,35,Negro,25,30,10,7,Cultivo resistente conocido por sus semillas ricas en aceite,https://images.unsplash.com/photo-1564826998072-97e2957ad5df?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,70-100,1000
+Café,24,75,60,Rojo,35,20,25,5,Planta tropical que prospera en climas húmedos,https://images.unsplash.com/photo-1552346989-e069318e20a5?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,700-1000,2200
+Papa,18,65,50,Franco,30,15,20,9,Cultivo de tubérculo que requiere suelo bien drenado,https://images.unsplash.com/photo-1609161307645-3ad8d7cafb55?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,90-120,1500
+Uvas,26,55,45,Arcilloso,18,25,15,4,Cultivo frutal adecuado para vinificación y consumo fresco,https://images.unsplash.com/photo-1603186741833-4a7cf699a8eb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,150-180,600
+Algodón,32,60,40,Negro,50,30,20,8,Cultivo comercial utilizado en la industria textil,https://images.unsplash.com/photo-1502395809857-fd80069897d0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,160-180,2500
+Té,20,85,75,Rojo,40,10,35,11,Cultivo delicado que se cultiva en regiones de gran altitud y humedad,https://images.unsplash.com/photo-1668733521099-c120aa4ebbdc?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,730-1460,2000
+Soja,29,58,38,Franco,28,22,18,5,Legumbre rica en proteína utilizada para producción de aceite y alimentos,https://images.unsplash.com/photo-1630095829721-5179c495f1cf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,80-120,1000
+Maíz,30,65,50,Franco,35,15,25,6,Grano básico ampliamente cultivado en América Latina,https://images.unsplash.com/photo-1567547921486-f280c2f53b5d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,60-100,1200
+Cacao,26,85,70,Rojo,40,25,35,10,Cultivo tropical utilizado en la producción de chocolate,https://images.unsplash.com/photo-1573710661345-610f790e1218?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,1200-1500,2500
+Aguacate,24,70,60,Franco,30,20,15,3,Fruta nutritiva ampliamente cultivada en América Latina,https://images.unsplash.com/photo-1585242902894-e8a65ecbe1ef?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,1000-1500,2000
+Piña,27,75,55,Rojo,25,18,20,7,Fruta tropical conocida por su dulzura,https://images.unsplash.com/photo-1722950563017-c9dc445aaf0d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,540-730,1000
+Plátano,28,80,65,Arcilloso,35,30,25,6,Fruta ampliamente consumida que prospera en climas húmedos,https://images.unsplash.com/photo-1539808505172-71ad23d99b4a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,270-360,1800
+Yuca,29,60,50,Arenoso,20,15,10,4,Cultivo de raíz resistente a la sequía,https://images.unsplash.com/photo-1692765110549-48bdb9c77e1f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,240-365,600
+Quinua,22,50,40,Franco,15,10,12,5,Grano andino alto en proteínas,https://images.unsplash.com/photo-1560327301-ad5b41c8b575?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,90-120,500
+Papaya,30,75,50,Rojo,28,25,18,8,Fruta tropical rica en vitaminas,https://images.unsplash.com/photo-1581242335635-ce8631489ac5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,150-180,1000
+Mango,32,65,40,Franco,30,20,15,1,Fruta tropical jugosa popular en América Latina,https://images.unsplash.com/photo-1655776160548-91b9781e36d0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,100-150,1200
+Ají,26,55,35,Arenoso,20,18,12,3,Fruto picante utilizado en muchos platos latinoamericanos,https://images.unsplash.com/photo-1588252303782-cb80119abd6d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,60-90,800
+Frijoles,25,60,40,Franco,35,20,15,9,Leguminosa básica en la cocina latinoamericana,https://images.unsplash.com/photo-1715941873135-217c6f7c7f42?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,70-90,900
+Lentejas,24,55,38,Arcilloso,28,15,10,4,Leguminosa nutritiva rica en proteínas,https://images.unsplash.com/photo-1733080223028-4577705b2bad?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,100-110,600
+Maní,27,50,45,Arenoso,25,20,18,5,Leguminosa cultivada por sus semillas comestibles,https://images.unsplash.com/photo-1524594345772-c953a3ae53e8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,90-120,700
+Camote,26,65,50,Franco,20,18,22,10,Tubérculo nutritivo rico en fibra,https://images.unsplash.com/photo-1617361343762-dcc3ba4ee436?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,90-150,900
+Nopal,30,50,35,Arenoso,15,10,12,3,Planta cactácea utilizada en gastronomía mexicana,https://images.unsplash.com/photo-1563422156298-c778a278f9a5?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,60-90,300
+Chirimoya,22,70,40,Franco,18,15,10,4,Fruta tropical de sabor dulce y cremoso,https://images.unsplash.com/photo-1627521742129-bf9cda19b21f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,180-300,1200
+Ciruelo,24,55,35,Franco,20,18,15,5,Fruta jugosa y dulce,https://images.unsplash.com/photo-1564750497011-ead0ce4b9448?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,100-150,1000
+Guaraná,28,80,60,Arcilloso,25,20,20,6,Fruta utilizada en bebidas energéticas,https://images.unsplash.com/photo-1737992468893-9c109da39f9b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,365-730,2000
+Yerba Mate,26,75,55,Rojo,30,20,25,7,Planta utilizada para infusión típica de Sudamérica,https://images.unsplash.com/photo-1721570799840-71244589f5b5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,730-1460,2500
+Cebolla,20,65,40,Franco,18,12,10,9,Hortaliza de bulbo utilizada en cocina,https://plus.unsplash.com/premium_photo-1680345332736-78bac61bc086?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,90-120,700
+Ajo,22,60,35,Arenoso,15,10,12,10,Planta aromática con usos culinarios y medicinales,https://images.unsplash.com/photo-1615477550927-6ec8445fcfe6?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,150-210,500
+Pepino,25,70,45,Franco,20,15,12,5,Hortaliza fresca utilizada en ensaladas,https://images.unsplash.com/photo-1518568403628-df55701ade9e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,50-70,600
+Higo,30,50,30,Arenoso,25,15,10,6,Fruta dulce y fibrosa,https://images.unsplash.com/photo-1600455532114-e3bb783f29ba?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,120-150,800
+Cilantro,18,65,35,Franco,15,10,8,11,Hierba aromática utilizada en cocina,https://images.unsplash.com/photo-1601493700603-43461216807a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,30-50,400
+Judía,24,60,40,Franco,30,20,15,4,Legumbre popular en diversas cocinas latinoamericanas,https://images.unsplash.com/photo-1560252030-9fc63cb78dac?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,60-90,800
+Trigo,20,55,35,Franco,25,18,12,6,Cereal ampliamente cultivado para la producción de harina,https://images.unsplash.com/photo-1437252611977-07f74518abd7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,120-150,1000
+Cebada,18,50,30,Arcilloso,22,15,10,5,Cereal resistente utilizado en panadería y cervecería,https://images.unsplash.com/photo-1491986246887-3e56faa95239?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,90-120,900
+Chía,26,45,30,Arenoso,20,12,10,3,Semilla rica en omega-3 y fibra,https://images.unsplash.com/photo-1502825926876-e8819fbb2fd0?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,100-150,600

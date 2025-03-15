@@ -40,6 +40,20 @@ def predict():
     # Obtener predicciones
     predictions_result = predictions.getPredictions(temperature, humidity, moisture, soil_type, nitrogen, potassium, phosphorus, month)
 
+    print({
+    "predictions": predictions_result,
+    "weather_data": {
+        "temperature": temperature,
+        "humidity": humidity,
+        "moisture": moisture,
+        "precipitation": precipitation,
+        "soil_type": soil_type,
+        "nitrogen": nitrogen,
+        "potassium": potassium,
+        "phosphorus": phosphorus
+    }
+    })
+
     return jsonify({
         "predictions": predictions_result,
         "weather_data": {
