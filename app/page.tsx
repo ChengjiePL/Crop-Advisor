@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import {
   Thermometer,
@@ -24,15 +25,9 @@ import {
   Select,
   SelectContent,
   SelectItem,
-  SelectTrigger,
+  SelectTrigger,  
   SelectValue,
 } from "@/components/ui/select";
-
-export const metadata = {
-  title: "CropAdvisor",
-  description:
-    "Get personalized crop recommendations based on your location and planting date.",
-};
 
 export default function Home() {
   return (
@@ -49,8 +44,7 @@ export default function Home() {
               Find the perfect crops for your location
             </h2>
             <p className="max-w-[600px] text-muted-foreground md:text-xl">
-              Enter your location and planting date to get personalized crop
-              recommendations.
+              Enter your location and planting date to get personalized crop recommendations.
             </p>
           </div>
           <Card className="mx-auto max-w-[600px] w-full">
@@ -84,12 +78,11 @@ export default function Home() {
                           <SelectValue placeholder="Select soil type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="clay">Clay</SelectItem>
-                          <SelectItem value="sandy">Sandy</SelectItem>
-                          <SelectItem value="loamy">Loamy</SelectItem>
-                          <SelectItem value="silty">Silty</SelectItem>
-                          <SelectItem value="peaty">Peaty</SelectItem>
-                          <SelectItem value="chalky">Chalky</SelectItem>
+                          <SelectItem value="Franco">Franco</SelectItem>
+                          <SelectItem value="Rojo">Rojo</SelectItem>
+                          <SelectItem value="Arcilloso">Arcilloso</SelectItem>
+                          <SelectItem value="Negro">Negro</SelectItem>
+                          <SelectItem value="Arenoso">Arenoso</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

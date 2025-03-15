@@ -1,12 +1,15 @@
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowLeft, Droplets, Sun, Thermometer } from "lucide-react"
+"use client";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowLeft, Droplets, Sun, Thermometer } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
-// Mock data for demonstration
+// Datos de área para demostración
 const areaInfoData = {
   "San Francisco": {
     climate: "Mediterranean",
@@ -20,67 +23,62 @@ const areaInfoData = {
     temperature: "10-20°C",
     rainfall: "800mm annually",
   },
-}
+};
 
-const cropData = [
-  {
-    id: "tomatoes",
-    name: "Tomatoes",
-    suitability: "Excellent",
-    growthPeriod: "60-80 days",
-    waterNeeds: "Medium",
-    description: "Thrives in warm weather with well-drained soil.",
-  },
-  {
-    id: "lettuce",
-    name: "Lettuce",
-    suitability: "Very Good",
-    growthPeriod: "45-60 days",
-    waterNeeds: "Medium-High",
-    description: "Cool-season crop that grows well in spring and fall.",
-  },
-  {
-    id: "bell-peppers",
-    name: "Bell Peppers",
-    suitability: "Good",
-    growthPeriod: "60-90 days",
-    waterNeeds: "Medium",
-    description: "Requires warm temperatures and full sun exposure.",
-  },
-  {
-    id: "carrots",
-    name: "Carrots",
-    suitability: "Good",
-    growthPeriod: "70-80 days",
-    waterNeeds: "Medium",
-    description: "Grows best in loose, sandy soil free from rocks.",
-  },
-  {
-    id: "zucchini",
-    name: "Zucchini",
-    suitability: "Excellent",
-    growthPeriod: "45-55 days",
-    waterNeeds: "Medium",
-    description: "Fast-growing summer squash that produces abundantly.",
-  },
-  {
-    id: "basil",
-    name: "Basil",
-    suitability: "Very Good",
-    growthPeriod: "50-75 days",
-    waterNeeds: "Medium",
-    description: "Aromatic herb that pairs well with tomatoes in the garden.",
-  },
-]
+export default function ResultsPage() {
+  const searchParams = useSearchParams();
+  const location = searchParams.get("location") || "San Francisco";
+  const date = searchParams.get("date") || "2023-10-15";
+  const soil = searchParams.get("soil") || "loamy";
 
-export default function ResultsPage({ searchParams }) {
-  // In a real app, we would fetch this data based on the searchParams
-  const location = searchParams.location || "San Francisco"
-  const date = searchParams.date || "2023-10-15"
-  const soil = searchParams.soil || "loamy"
+  // Coordenadas de ejemplo para la ubicación
+  const coordinates = {
+    "San Francisco": { latitude: 37.7749, longitude: -122.4194 },
+    default: { latitude: 0, longitude: 0 },
+  };
+  const { latitude, longitude } = coordinates[location] || coordinates.default;
 
-  // Get area info based on location
-  const areaInfo = areaInfoData[location] || areaInfoData.default
+  // Estados para predicciones, loading y error
+  const [predictions, setPredictions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Información de área (tarjeta superior)
+  const areaInfo = areaInfoData[location] || areaInfoData.default;
+
+  // useEffect para hacer la petición al endpoint /predict
+  useEffect(() => {
+    async function fetchPredictions() {
+      try {
+        const response = await fetch("http://localhost:5000/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            latitude,
+            longitude,
+            date,
+            temperature: null,
+            humidity: null,
+            moisture: null,
+            soil_type: soil,
+            nitrogen: null,
+            potassium: null,
+            phosphorus: null,
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+        const data = await response.json();
+        setPredictions(data.predictions);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to fetch predictions");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPredictions();
+  }, [latitude, longitude, date, soil]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -161,58 +159,64 @@ export default function ResultsPage({ searchParams }) {
 
           <div className="grid gap-2">
             <h3 className="text-xl font-bold tracking-tight">Recommended Crops</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {cropData.map((crop) => (
-                <Link
-                  key={crop.id}
-                  href={`/crop/${crop.id}?location=${encodeURIComponent(location)}&date=${encodeURIComponent(date)}&soil=${encodeURIComponent(soil)}`}
-                  className="transition-transform hover:scale-[1.02] focus:scale-[1.02] active:scale-[0.98]"
-                >
-                  <Card className="h-full cursor-pointer hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="mb-4 flex items-center justify-between">
-                        <h4 className="text-lg font-semibold">{crop.name}</h4>
-                        <Badge
-                          variant={
-                            crop.suitability === "Excellent"
-                              ? "default"
-                              : crop.suitability === "Very Good"
+            {loading ? (
+              <p>Loading predictions...</p>
+            ) : error ? (
+              <p className="text-red-500">{error}</p>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {predictions.map((crop, index) => (
+                  <Link
+                    key={index}
+                    href={`/crop/${encodeURIComponent(crop["Crop Type"])}?location=${encodeURIComponent(location)}&date=${encodeURIComponent(date)}&soil=${encodeURIComponent(soil)}`}
+                    className="transition-transform hover:scale-[1.02] focus:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <Card className="h-full cursor-pointer hover:shadow-md transition-shadow">
+                      <CardContent className="p-6">
+                        <div className="mb-4 flex items-center justify-between">
+                          <h4 className="text-lg font-semibold">{crop["Crop Type"]}</h4>
+                          <Badge
+                            variant={
+                              crop.suitability === "Excellent"
+                                ? "default"
+                                : crop.suitability === "Very Good"
                                 ? "secondary"
                                 : "outline"
-                          }
-                        >
-                          {crop.suitability}
-                        </Badge>
-                      </div>
-                      <div className="mb-4 aspect-video overflow-hidden rounded-md bg-muted">
-                        <Image
-                          src={`/placeholder.svg?height=200&width=400&text=${crop.name}`}
-                          alt={crop.name}
-                          width={400}
-                          height={200}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div className="grid gap-2">
-                        <div className="grid grid-cols-2 gap-1 text-sm">
-                          <span className="text-muted-foreground">Growth Period:</span>
-                          <span>{crop.growthPeriod}</span>
+                            }
+                          >
+                            {crop.suitability}
+                          </Badge>
                         </div>
-                        <div className="grid grid-cols-2 gap-1 text-sm">
-                          <span className="text-muted-foreground">Water Needs:</span>
-                          <span>{crop.waterNeeds}</span>
+                        <div className="mb-4 aspect-video overflow-hidden rounded-md bg-muted">
+                          <Image
+                            src={crop["Image Link"] || `/placeholder.svg?height=200&width=400&text=${crop["Crop Type"]}`}
+                            alt={crop["Crop Type"]}
+                            width={400}
+                            height={200}
+                            unoptimized
+                            className="h-full w-full object-cover"
+                          />
                         </div>
-                        <p className="mt-2 text-sm text-muted-foreground">{crop.description}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
+                        <div className="grid gap-2">
+                          <div className="grid grid-cols-2 gap-1 text-sm">
+                            <span className="text-muted-foreground">Growth Period:</span>
+                            <span>{crop["Growth Period"]} days</span>
+                          </div>
+                          <div className="grid grid-cols-2 gap-1 text-sm">
+                            <span className="text-muted-foreground">Water Needs:</span>
+                            <span>{crop["Water Needs"]} mm</span>
+                          </div>
+                          <p className="mt-2 text-sm text-muted-foreground">{crop.Description}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>
     </div>
-  )
+  );
 }
-
