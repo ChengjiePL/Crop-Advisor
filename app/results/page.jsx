@@ -244,13 +244,13 @@ export default function ResultsPage() {
                           <span className="text-muted-foreground">
                             Growth Period:
                           </span>
-                          <span>{crop["Growth Period"]} L/m²</span>
+                          <span>{crop["Growth Period"]} days</span>
                         </div>
                         <div className="grid grid-cols-2 gap-1 text-sm">
                           <span className="text-muted-foreground">
                             Water Needs:
                           </span>
-                          <span>{crop["Water Needs"]} days</span>
+                          <span>{crop["Water Needs"]} L/m²</span>
                         </div>
                         <p className="mt-2 text-sm text-muted-foreground">
                           {crop.Description}
