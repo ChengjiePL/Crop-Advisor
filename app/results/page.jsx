@@ -11,6 +11,7 @@ import {
   Sun,
   Thermometer,
   SproutIcon as Seedling,
+  Sprout,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -69,12 +70,19 @@ export default function ResultsPage() {
               <span className="sr-only">Back</span>
             </Link>
           </Button>
-          <h1 className="text-2xl font-bold tracking-tight">CropAdvisor</h1>
+          <div className="container flex h-20 items-center justify-center">
+            <div className="flex items-center gap-2">
+              <Sprout className="h-8 w-8 text-primary" />
+              <h1 className="text-3xl font-heading font-semibold tracking-tight text-soil-dark">
+                CropAdvisor
+              </h1>
+            </div>
+          </div>
           <div className="w-10" />
         </div>
       </header>
       <main className="flex-1">
-      <section className="container mx-auto px-10 py-8 md:py-10">
+        <section className="container mx-auto px-10 py-8 md:py-10">
           <div className="grid gap-2">
             <h2 className="text-3xl font-bold tracking-tight">
               Crop Parameters
@@ -89,7 +97,6 @@ export default function ResultsPage() {
           <div className="grid gap-2 mt-4">
             {weatherData ? (
               <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-                
                 <Card>
                   <CardContent className="flex items-center gap-4 p-6">
                     <Thermometer className="h-8 w-8 text-primary" />
@@ -148,7 +155,9 @@ export default function ResultsPage() {
                     <CiCloudDrizzle alt="Precipitation" className="h-8 w-8" />
                     <div>
                       <h4 className="font-medium">Precipitation</h4>
-                      <p>{weatherData ? weatherData.precipitation : "N/A"}mm/m2</p>
+                      <p>
+                        {weatherData ? weatherData.precipitation : "N/A"}mm/m2
+                      </p>
                     </div>
                   </CardContent>
                 </Card>

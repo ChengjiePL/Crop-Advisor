@@ -2,114 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   :root {
+    --background: 45 33% 98%;
+    --foreground: 40 15% 25%;
 
-    --background: 0 0% 100%;
+    --card: 45 33% 98%;
+    --card-foreground: 40 15% 25%;
 
-    --foreground: 0 0% 3.9%;
+    --popover: 45 33% 98%;
+    --popover-foreground: 40 15% 25%;
 
-    --card: 0 0% 100%;
+    --primary: 125 30% 37%;
+    --primary-foreground: 0 0% 100%;
 
-    --card-foreground: 0 0% 3.9%;
+    --secondary: 36 40% 72%;
+    --secondary-foreground: 40 15% 25%;
 
-    --popover: 0 0% 100%;
+    --muted: 40 10% 92%;
+    --muted-foreground: 40 10% 40%;
 
-    --popover-foreground: 0 0% 3.9%;
+    --accent: 36 40% 72%;
+    --accent-foreground: 40 15% 25%;
 
-    --primary: 0 0% 9%;
-
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 0 0% 96.1%;
-
-    --secondary-foreground: 0 0% 9%;
-
-    --muted: 0 0% 96.1%;
-
-    --muted-foreground: 0 0% 45.1%;
-
-    --accent: 0 0% 96.1%;
-
-    --accent-foreground: 0 0% 9%;
-
-    --destructive: 0 84.2% 60.2%;
-
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
+    --border: 40 10% 85%;
+    --input: 40 10% 85%;
+    --ring: 125 30% 37%;
 
-    --input: 0 0% 89.8%;
+    --radius: 0.5rem;
 
-    --ring: 0 0% 3.9%;
-
-    --chart-1: 12 76% 61%;
-
-    --chart-2: 173 58% 39%;
-
-    --chart-3: 197 37% 24%;
-
-    --chart-4: 43 74% 66%;
-
-    --chart-5: 27 87% 67%;
-
-    --radius: 0.5rem
+    --chart-1: 125 30% 37%;
+    --chart-2: 36 40% 72%;
+    --chart-3: 40 15% 25%;
+    --chart-4: 15 60% 45%;
+    --chart-5: 85 40% 40%;
   }
+
   .dark {
+    --background: 40 15% 15%;
+    --foreground: 40 10% 92%;
 
-    --background: 0 0% 3.9%;
+    --card: 40 15% 18%;
+    --card-foreground: 40 10% 92%;
 
-    --foreground: 0 0% 98%;
+    --popover: 40 15% 18%;
+    --popover-foreground: 40 10% 92%;
 
-    --card: 0 0% 3.9%;
+    --primary: 125 30% 37%;
+    --primary-foreground: 0 0% 100%;
 
-    --card-foreground: 0 0% 98%;
+    --secondary: 36 30% 35%;
+    --secondary-foreground: 40 10% 92%;
 
-    --popover: 0 0% 3.9%;
+    --muted: 40 15% 25%;
+    --muted-foreground: 40 10% 70%;
 
-    --popover-foreground: 0 0% 98%;
+    --accent: 36 30% 35%;
+    --accent-foreground: 40 10% 92%;
 
-    --primary: 0 0% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 40 10% 92%;
 
-    --primary-foreground: 0 0% 9%;
-
-    --secondary: 0 0% 14.9%;
-
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 14.9%;
-
-    --muted-foreground: 0 0% 63.9%;
-
-    --accent: 0 0% 14.9%;
-
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 14.9%;
-
-    --input: 0 0% 14.9%;
-
-    --ring: 0 0% 83.1%;
-
-    --chart-1: 220 70% 50%;
-
-    --chart-2: 160 60% 45%;
-
-    --chart-3: 30 80% 55%;
-
-    --chart-4: 280 65% 60%;
-
-    --chart-5: 340 75% 55%
+    --border: 40 15% 30%;
+    --input: 40 15% 30%;
+    --ring: 125 30% 37%;
   }
 }
-
-
 
 @layer base {
   * {
@@ -117,5 +78,59 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: url("/patterns/subtle-field.svg");
+    background-repeat: repeat;
+    background-size: 200px;
+    background-attachment: fixed;
+    background-opacity: 0.05;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-medium;
+  }
+
+  /* Custom agriculture-themed scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/70 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+}
+
+@layer components {
+  .crop-card {
+    @apply transition-all duration-300 hover:shadow-md hover:shadow-foliage/20 hover:-translate-y-1;
+  }
+
+  .soil-bg {
+    background-color: #f8f5f0;
+    background-image: url("/patterns/soil-texture.svg");
+    background-size: 100px;
+    background-repeat: repeat;
+    background-blend-mode: overlay;
+    background-opacity: 0.1;
+  }
+
+  .field-bg {
+    background-color: #f9f9f7;
+    background-image: url("/patterns/field-lines.svg");
+    background-size: 150px;
+    background-repeat: repeat;
+    background-blend-mode: overlay;
+    background-opacity: 0.1;
   }
 }
