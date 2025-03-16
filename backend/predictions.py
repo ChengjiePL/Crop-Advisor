@@ -89,12 +89,12 @@ def getPredictions(temperature, humidity, moisture, soil_type, nitrogen, potassi
     'Temparature': temperature,
     'Humidity': humidity,
     'Moisture': moisture,
-    'Soil Type': label_encoders['Soil Type'].transform([soil_type])[0] if soil_type != "None" else -1,  # Usar -1 para representar "todos"
+    'Soil Type': label_encoders['Soil Type'].transform([soil_type])[0] if soil_type != "" else -1,  # Usar -1 para representar "todos"
     'Nitrogen': nitrogen,
     'Potassium': potassium,
     'Phosphorous': phosphorus,
     'Month': month
     }
     
-    best_crops = predict_top_k_crops(input_data, weights, k=20)
+    best_crops = predict_top_k_crops(input_data, weights, k=12)
     return best_crops

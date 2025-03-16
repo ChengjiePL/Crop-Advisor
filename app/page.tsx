@@ -12,18 +12,33 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2 } from "lucide-react";
+import {
+  Loader2,
+  Thermometer,
+  Droplets,
+  Droplet,
+  Leaf,
+  MapPin,
+  FlaskConical,
+  TestTube,
+  ChevronDown,
+} from "lucide-react";import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export default function Home() {
   const [formData, setFormData] = useState({
-    date: "",
-    soil_type: "None",
+    date: new Date().toISOString().split('T')[0],
+    soil_type: "",
     temperature: "",
     humidity: "",
     moisture: "",
     nitrogen: "",
     potassium: "",
     phosphorus: "",
+    city: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -83,6 +98,20 @@ export default function Home() {
             <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="grid gap-4">
                 {/* Planting Date */}
+                <Label htmlFor="location">Location</Label>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="location"
+                    placeholder="Enter your location"
+                    className="pl-10"
+                    value={formData.city}
+                    onChange={(e) =>
+                      setFormData({ ...formData, city: e.target.value })
+                    }
+                    required
+                  />
+                </div>
                 <div className="grid gap-2">
                   <Label>Planting Date</Label>
                   <Input
@@ -96,55 +125,65 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Soil Type */}
-                <div className="grid gap-2">
-                  <Label>Soil Type</Label>
-                  <Select
-                    value={formData.soil_type}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, soil_type: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select soil type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Franco">Franco</SelectItem>
-                      <SelectItem value="None">None</SelectItem>
-                      <SelectItem value="Arcilloso">Arcilloso</SelectItem>
-                      <SelectItem value="Arenoso">Arenoso</SelectItem>
-                      <SelectItem value="Rojo">Rojo</SelectItem>
-                      <SelectItem value="Negro">Negro</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Advanced Parameters */}
-                <div className="grid gap-4">
-                  {[
-                    "temperature",
-                    "humidity",
-                    "moisture",
-                    "nitrogen",
-                    "potassium",
-                    "phosphorus",
-                  ].map((field) => (
-                    <div key={field} className="grid gap-2">
-                      <Label>
-                        {field.charAt(0).toUpperCase() + field.slice(1)}
-                      </Label>
-                      <Input
-                        type="number"
-                        name={field}
-                        placeholder={`Enter ${field}`}
-                        value={formData[field]}
-                        onChange={(e) =>
-                          setFormData({ ...formData, [field]: e.target.value })
+                <Collapsible className="w-full mt-2">
+                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-md border px-4 py-2 font-medium text-sm">
+                    <span>Advanced Soil Parameters</span>
+                    <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-2 space-y-4">
+                    {/* Soil Type */}
+                    <div className="grid gap-2">
+                      <Label>Soil Type</Label>
+                      <Select
+                        value={formData.soil_type}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, soil_type: value })
                         }
-                      />
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select soil type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Franco">Franco</SelectItem>
+                          <SelectItem value="Arcilloso">Arcilloso</SelectItem>
+                          <SelectItem value="Arenoso">Arenoso</SelectItem>
+                          <SelectItem value="Rojo">Rojo</SelectItem>
+                          <SelectItem value="Negro">Negro</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
-                  ))}
-                </div>
+
+                    {/* Advanced Parameters */}
+                    <div className="grid gap-4">
+                      {[
+                        "temperature",
+                        "humidity",
+                        "moisture",
+                        "nitrogen",
+                        "potassium",
+                        "phosphorus",
+                      ].map((field) => (
+                        <div key={field} className="grid gap-2">
+                          <Label>
+                            {field.charAt(0).toUpperCase() + field.slice(1)}
+                          </Label>
+                          <Input
+                            type="number"
+                            name={field}
+                            placeholder={`Enter ${field}`}
+                            value={formData[field]}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                [field]: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
 
                 <Button type="submit" disabled={loading}>
                   {loading ? (
@@ -155,6 +194,7 @@ export default function Home() {
               </form>
             </CardContent>
           </Card>
+
         </section>
       </main>
     </div>
