@@ -5,6 +5,7 @@ import predictions
 import climate_requests
 import location_requests
 import crop_requests
+import text_requests
 
 app = Flask(__name__)
 CORS(app)
@@ -74,8 +75,15 @@ def crop_details():
     data = request.get_json()
     crop_name = data.get("crop", "").lower()
     info_crop = crop_requests.get_crop_info(crop_name)
-    print(info_crop)
     return jsonify(info_crop)
+
+@app.route('/text', methods=['POST'])
+def crop_text():
+    data = request.get_json()
+    crop_name = data.get("crop", "").lower()
+    category = data.get("category", "")
+    text = text_requests.query_azure_openai(crop_name, category)
+    return jsonify({"text": text})
 
 
 if __name__ == '__main__':
