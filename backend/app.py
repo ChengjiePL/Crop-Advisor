@@ -4,9 +4,10 @@ from flask_cors import CORS
 import predictions
 import climate_requests
 import location_requests
+import crop_requests
 
 app = Flask(__name__)
-CORS(app)  # Permitir peticiones desde cualquier origen (ajústalo según tu seguridad)
+CORS(app)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -67,6 +68,15 @@ def predict():
             "phosphorus": phosphorus
         }
     })
+
+@app.route('/crop', methods=['POST'])
+def crop_details():
+    data = request.get_json()
+    crop_name = data.get("crop", "").lower()
+    info_crop = crop_requests.get_crop_info(crop_name)
+    print(info_crop)
+    return jsonify(info_crop)
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

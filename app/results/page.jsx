@@ -207,11 +207,7 @@ export default function ResultsPage() {
               {cropData.map((crop, index) => (
                 <Link
                   key={index}
-                  href={`/crop/${encodeURIComponent(crop["Crop Type"])}?location=${encodeURIComponent(
-                    localParams.location,
-                  )}&date=${encodeURIComponent(localParams.date)}&soil=${encodeURIComponent(
-                    localParams.soil,
-                  )}`}
+                  href={`/crop/${encodeURIComponent(crop["Crop Type"])}?name=${encodeURIComponent(crop["Crop Type"])}`}
                   className="transition-transform hover:scale-[1.02] focus:scale-[1.02] active:scale-[0.98]"
                 >
                   <Card className="h-full cursor-pointer hover:shadow-md transition-shadow">
@@ -221,7 +217,7 @@ export default function ResultsPage() {
                           {crop["Crop Type"]}
                         </h4>
                         <Badge variant="default">
-                          {crop["Score"] ? crop["Score"].toFixed(2) : "N/A"}
+                          {crop["Quality"] ? crop["Quality"] : "N/A"}
                         </Badge>
                       </div>
                       <div className="mb-4 aspect-video overflow-hidden rounded-md bg-muted">
