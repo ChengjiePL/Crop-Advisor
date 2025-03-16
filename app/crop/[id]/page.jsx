@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter} from "next/navigation";
 import { ArrowLeft, Calendar, Droplets, SproutIcon as Seedling } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function CropDetailsPage() {
+  const router = useRouter();
   // Obtener parámetros de la ruta
   const params = useParams();
   const searchParams = useSearchParams();
@@ -114,13 +115,9 @@ export default function CropDetailsPage() {
     <div className="flex min-h-screen flex-col">
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
-          <Button variant="ghost" size="icon" asChild>
-            <Link
-              href={`/results?location=${encodeURIComponent(location)}&date=${encodeURIComponent(date)}&soil=${encodeURIComponent(soil)}`}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="sr-only">Back to Results</span>
-            </Link>
+          <Button variant="ghost" size="icon" onClick={() => router.back()}>
+            <ArrowLeft className="h-4 w-4" />
+            <span className="sr-only">Back</span>
           </Button>
           <h1 className="text-2xl font-bold tracking-tight">CropAdvisor</h1>
           <div className="w-10" />
