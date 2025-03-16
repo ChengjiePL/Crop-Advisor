@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, useRouter} from "next/navigation";
@@ -64,6 +63,58 @@ export default function CropDetailsPage() {
       setCulinaryUsesText(text);
     }
   }
+
+  async function handlePay() {
+    try {
+      const username = "10001586";
+      const password = "09a5afd1679034f27061ee4a19a21d3acc94c8733b72c7a4a85b64115f404b08";
+      const basicAuth = "Basic " + btoa(`${username}:${password}`);
+      
+      const response = await fetch("https://api-sandbox.payretailers.com/payments/v2/transactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": basicAuth
+        },
+        body: JSON.stringify({
+          paymentMethodId: "b04f2ffd-0751-4771-9d07-e9c866977896",
+          amount: "10000",
+          currency: "BRL",
+          description: "Test Demo",
+          trackingId: "Test-Tracking",
+          notificationUrl: "https://cropretailers.free.beeceptor.com/notification",
+          returnUrl: "https://cropretailers.free.beeceptor.com/return",
+          cancelUrl: "https://cropretailers.free.beeceptor.com/cancel",
+          language: "ES",
+          customer: {
+            firstName: "Prueba",
+            lastName: "Test",
+            email: "test5591@payretailers.com",
+            country: "BR",
+            personalId: "49586181049",
+            city: "Buenos Aires",
+            address: "dsa",
+            zip: "130",
+            phone: "1149682315",
+            deviceId: "DEVICE",
+            ip: "181.166.176.12"
+          }
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.form && data.form.action) {
+        // Redirigir al usuario a la URL de pago
+        router.push(data.form.action);
+      } else {
+        console.error("No se recibió una URL de pago válida.");
+      }
+    } catch (error) {
+      console.error("Error llamando a la API de PayRetailers:", error);
+    }
+  }
+  
 
   useEffect(() => {
     async function fetchCropDetails() {
@@ -141,6 +192,7 @@ export default function CropDetailsPage() {
             <div className="grid gap-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">{cropDetails.name}</h2>
+                <Button onClick={handlePay} variant="default">Pagar</Button>
                 <Badge
                   variant={
                     cropDetails.suitability === "Excellent"

@@ -1,0 +1,42 @@
+###
+GET http://localhost:8888/agent/response HTTP/1.1
+Content-Type: application/json
+
+{
+  "vectorStoreId": "vs_67d594a375c48191acb41791a0cc039f",
+  "input": "Necesito ayuda para integrar woocomerce"
+}
+
+###
+GET http://localhost:8888/agent/dataset/setup HTTP/1.1
+Content-Type: application/json
+
+###
+POST https://api-sandbox.payretailers.com/payments/v2/transactions HTTP/1.1
+Content-Type: application/json
+Authorization: Basic MTAwMDE1ODY6MDlhNWFmZDE2NzkwMzRmMjcwNjFlZTRhMTlhMjFkM2FjYzk0Yzg3MzNiNzJjN2E0YTg1YjY0MTE1ZjQwNGIwOA==
+
+{
+    "paymentMethodId": "b04f2ffd-0751-4771-9d07-e9c866977896",
+    "amount": "10000",
+    "currency": "BRL",
+    "description": "Test Demo",
+    "trackingId": "Test-Tracking",
+    "notificationUrl": "USAD UNA URL DE BEECEPTOR PARA QUE OS LLEGUEN LAS UPDATES",
+    "returnUrl": "USAD UNA URL DE BEECEPTOR PARA QUE OS LLEGUEN LAS UPDATES",
+    "cancelUrl": "USAD UNA URL DE BEECEPTOR PARA QUE OS LLEGUEN LAS UPDATES",
+    "language": "ES",
+    "customer": {
+        "firstName": "Prueba",
+        "lastName": "Test",
+        "email": "test5591@payretailers.com",
+        "country": "BR",
+        "personalId": "49586181049",
+        "city": "Buenos Aires",
+        "address": "dsa",
+        "zip": "130",
+        "phone": "1149682315",
+        "deviceId": "DEVICE",
+        "ip": "181.166.176.12"
+    }
+}
