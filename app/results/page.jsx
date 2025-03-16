@@ -77,7 +77,7 @@ export default function ResultsPage() {
       <section className="container mx-auto px-10 py-8 md:py-10">
           <div className="grid gap-2">
             <h2 className="text-3xl font-bold tracking-tight">
-              Crop Recommendations
+              Crop Parameters
             </h2>
             <p className="text-muted-foreground">
               Based on your location, planting preferences and current weather
@@ -86,7 +86,7 @@ export default function ResultsPage() {
           </div>
 
           {/* Información del clima proveniente del backend */}
-          <div className="grid gap-2">
+          <div className="grid gap-2 mt-4">
             {weatherData ? (
               <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
                 
@@ -199,10 +199,10 @@ export default function ResultsPage() {
           </div>
 
           {/* Sección de cultivos recomendados */}
-          <div className="grid gap-2">
-            <h3 className="text-xl font-bold tracking-tight">
-              Recommended Crops
-            </h3>
+          <div className="grid gap-3 mt-4">
+            <h2 className="text-3xl font-bold tracking-tight">
+              Crop Recommendations
+            </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {cropData.map((crop, index) => (
                 <Link
