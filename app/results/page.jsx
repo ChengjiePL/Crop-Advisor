@@ -89,22 +89,37 @@ export default function ResultsPage() {
           <div className="grid gap-2">
             {weatherData ? (
               <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+                
                 <Card>
                   <CardContent className="flex items-center gap-4 p-6">
-                    <TbPlant className="h-8 w-8 text-primary" />
+                    <Thermometer className="h-8 w-8 text-primary" />
                     <div>
-                      <h4 className="font-medium">Soil Type</h4>
-                      <p>{weatherData ? weatherData.soil_type : "N/A"}</p>
+                      <h4 className="font-medium">Location</h4>
+                      <p>{weatherData ? weatherData.city : "N/A"}</p>
                     </div>
                   </CardContent>
                 </Card>
+
+                {weatherData.soil_type !== "" && (
+                  <Card>
+                    <CardContent className="flex items-center gap-4 p-6">
+                      <div className="flex h-8 w-8 items-center justify-center text-primary">
+                        N
+                      </div>
+                      <div>
+                        <h4 className="font-medium">Soil Type</h4>
+                        <p>{weatherData ? weatherData.soil_type : "N/A"}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
                 <Card>
                   <CardContent className="flex items-center gap-4 p-6">
                     <Thermometer className="h-8 w-8 text-primary" />
                     <div>
                       <h4 className="font-medium">Temperature</h4>
-                      <p>{Number(weatherData.temperature).toFixed(1)}°C</p>
+                      <p>{weatherData ? weatherData.temperature : "N/A"}°C</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -113,7 +128,7 @@ export default function ResultsPage() {
                     <Droplets className="h-8 w-8 text-primary" />
                     <div>
                       <h4 className="font-medium">Humidity</h4>
-                      <p>{Number(weatherData.humidity).toFixed(1)}%</p>
+                      <p>{weatherData ? weatherData.humidity : "N/A"}%</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -123,7 +138,7 @@ export default function ResultsPage() {
                     <Seedling alt="Moisture" className="h-8 w-8" />
                     <div>
                       <h4 className="font-medium">Soil Moisture</h4>
-                      <p>{Number(weatherData.moisture).toFixed(2)}</p>
+                      <p>{weatherData ? weatherData.moisture : "N/A"}%</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -133,7 +148,7 @@ export default function ResultsPage() {
                     <CiCloudDrizzle alt="Precipitation" className="h-8 w-8" />
                     <div>
                       <h4 className="font-medium">Precipitation</h4>
-                      <p>{Number(weatherData.precipitation).toFixed(2)}</p>
+                      <p>{weatherData ? weatherData.precipitation : "N/A"}mm/m2</p>
                     </div>
                   </CardContent>
                 </Card>
