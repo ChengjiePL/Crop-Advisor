@@ -74,7 +74,7 @@ export default function ResultsPage() {
         </div>
       </header>
       <main className="flex-1">
-        <section className="container grid gap-6 pb-8 pt-6 md:py-10">
+      <section className="container mx-auto px-10 py-8 md:py-10">
           <div className="grid gap-2">
             <h2 className="text-3xl font-bold tracking-tight">
               Crop Recommendations
@@ -235,13 +235,13 @@ export default function ResultsPage() {
                           <span className="text-muted-foreground">
                             Growth Period:
                           </span>
-                          <span>{crop["Growth Period"]}</span>
+                          <span>{crop["Growth Period"]} L/m²</span>
                         </div>
                         <div className="grid grid-cols-2 gap-1 text-sm">
                           <span className="text-muted-foreground">
                             Water Needs:
                           </span>
-                          <span>{crop["Water Needs"]}</span>
+                          <span>{crop["Water Needs"]} days</span>
                         </div>
                         <p className="mt-2 text-sm text-muted-foreground">
                           {crop.Description}

@@ -19,10 +19,31 @@ export default function CropDetailsPage() {
   const [cropDetails, setCropDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Estados para almacenar los textos obtenidos de /text
+  const [growingGuideText, setGrowingGuideText] = useState("");
+  const [commonProblemsText, setCommonProblemsText] = useState("");
+  const [culinaryUsesText, setCulinaryUsesText] = useState("");
+
   // Parámetros para la navegación de regreso a resultados
   const location = searchParams.get("location") || "San Francisco";
   const date = searchParams.get("date") || "2023-10-15";
   const soil = searchParams.get("soil") || "loamy";
+
+  // Función para hacer fetch a /text con el crop name y la categoría (1, 2 o 3)
+  async function fetchTextData(crop, category) {
+    try {
+      const response = await fetch("http://localhost:5000/text", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ crop, category })
+      });
+      const data = await response.json();
+      return data.text; // Se asume que la API retorna el texto en la propiedad "text"
+    } catch (error) {
+      console.error("Error fetching text data:", error);
+      return "";
+    }
+  }
 
   useEffect(() => {
     async function fetchCropDetails() {
@@ -44,14 +65,6 @@ export default function CropDetailsPage() {
           growthPeriod: data["Growth Period"] || "N/A",
           soilPreference: data["Soil Type"] || "N/A",
           plantingInstructions: data["Planting Instructions"] || "N/A",
-          careInstructions: data["Care Instructions"] || "N/A",
-          harvestingTips: data["Harvesting Tips"] || "N/A",
-          commonProblems: data["Common Problems"] || [],
-          companionPlants: data["Companion Plants"] || [],
-          avoidPlanting: data["Avoid Planting"] || [],
-          nutritionalValue: data["Nutritional Value"] || "N/A",
-          culinaryUses: data["Culinary Uses"] || "N/A",
-          suitability: data["Suitability"] || "N/A",
           phosphorous: data["Phosphorous"] || "N/A",
           humidity: data["Humidity"] || "N/A",
           temperature: data["Temparature"] || "N/A",
@@ -62,6 +75,16 @@ export default function CropDetailsPage() {
         };
 
         setCropDetails(mappedData);
+
+        // Realizar fetch a /text para cada categoría y asignar el resultado al estado correspondiente
+        const growingGuide = await fetchTextData(cropName, 1);
+        setGrowingGuideText(growingGuide);
+
+        const commonProblems = await fetchTextData(cropName, 2);
+        setCommonProblemsText(commonProblems);
+
+        const culinaryUses = await fetchTextData(cropName, 3);
+        setCulinaryUsesText(culinaryUses);
       } catch (error) {
         console.error("Error fetching crop details:", error);
       } finally {
@@ -97,19 +120,19 @@ export default function CropDetailsPage() {
           <div className="w-10" />
         </div>
       </header>
-      <main className="flex-1">
+      <main className="flex-1 mx-auto max-w-12xl px-4">
         <section className="container grid items-start gap-6 pb-8 pt-6 md:py-10">
           <div className="grid gap-6 md:grid-cols-[2fr_3fr]">
             <div>
               <div className="aspect-square overflow-hidden rounded-lg bg-muted">
-              <Image
-                src={cropDetails.imageLink}
-                alt={cropDetails.name}
-                width={500}
-                height={500}
-                unoptimized
-                className="h-full w-full object-cover"
-              />
+                <Image
+                  src={cropDetails.imageLink}
+                  alt={cropDetails.name}
+                  width={500}
+                  height={500}
+                  unoptimized
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
             <div className="grid gap-4">
@@ -125,7 +148,6 @@ export default function CropDetailsPage() {
                   }
                   className="text-sm"
                 >
-                  {cropDetails.suitability} Match
                 </Badge>
               </div>
               <p className="text-muted-foreground italic">{cropDetails.scientificName}</p>
@@ -137,7 +159,7 @@ export default function CropDetailsPage() {
                     <Droplets className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Water Needs</h4>
-                      <p className="text-sm">{cropDetails.waterNeeds}</p>
+                      <p className="text-sm">{cropDetails.waterNeeds} L/m²</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -146,7 +168,7 @@ export default function CropDetailsPage() {
                     <Calendar className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Growth Period</h4>
-                      <p className="text-sm">{cropDetails.growthPeriod}</p>
+                      <p className="text-sm">{cropDetails.growthPeriod} days</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -164,7 +186,7 @@ export default function CropDetailsPage() {
                     <Seedling className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Humidity Preference</h4>
-                      <p className="text-sm">{cropDetails.humidity}</p>
+                      <p className="text-sm">{cropDetails.humidity} %</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -173,7 +195,7 @@ export default function CropDetailsPage() {
                     <Seedling className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Temperature Preference</h4>
-                      <p className="text-sm">{cropDetails.temperature}</p>
+                      <p className="text-sm">{cropDetails.temperature} ºC</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -182,7 +204,7 @@ export default function CropDetailsPage() {
                     <Seedling className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Moisture Preference</h4>
-                      <p className="text-sm">{cropDetails.moisture}</p>
+                      <p className="text-sm">{cropDetails.moisture} %</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -191,7 +213,7 @@ export default function CropDetailsPage() {
                     <Seedling className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Potassium Preference</h4>
-                      <p className="text-sm">{cropDetails.temperature}</p>
+                      <p className="text-sm">{cropDetails.potassium} kg/ha</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -200,7 +222,7 @@ export default function CropDetailsPage() {
                     <Seedling className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Nitrogen Preference</h4>
-                      <p className="text-sm">{cropDetails.nitrogen}</p>
+                      <p className="text-sm">{cropDetails.nitrogen} kg/ha</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -209,7 +231,7 @@ export default function CropDetailsPage() {
                     <Seedling className="h-5 w-5 text-primary" />
                     <div>
                       <h4 className="font-medium">Phosphorous Preference</h4>
-                      <p className="text-sm">{cropDetails.phosphorous}</p>
+                      <p className="text-sm">{cropDetails.phosphorous} kg/ha</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -218,10 +240,9 @@ export default function CropDetailsPage() {
           </div>
 
           <Tabs defaultValue="growing" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="growing">Growing Guide</TabsTrigger>
               <TabsTrigger value="problems">Common Problems</TabsTrigger>
-              <TabsTrigger value="companions">Companion Plants</TabsTrigger>
               <TabsTrigger value="culinary">Culinary Uses</TabsTrigger>
             </TabsList>
             <TabsContent value="growing" className="mt-4">
@@ -233,18 +254,7 @@ export default function CropDetailsPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-6">
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Planting Instructions</h3>
-                    <p>{cropDetails.plantingInstructions}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Care Instructions</h3>
-                    <p>{cropDetails.careInstructions}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Harvesting Tips</h3>
-                    <p>{cropDetails.harvestingTips}</p>
-                  </div>
+                  <p>{growingGuideText}</p>
                 </CardContent>
               </Card>
             </TabsContent>
@@ -257,51 +267,7 @@ export default function CropDetailsPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {cropDetails.commonProblems && cropDetails.commonProblems.length > 0 ? (
-                    <ul className="list-disc pl-5 space-y-2">
-                      {cropDetails.commonProblems.map((problem, index) => (
-                        <li key={index}>{problem}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>No common problems listed for this crop.</p>
-                  )}
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="companions" className="mt-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Companion Planting</CardTitle>
-                  <CardDescription>
-                    Plants that grow well with {cropDetails.name.toLowerCase()} and those to avoid
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-6">
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Good Companions</h3>
-                    {cropDetails.companionPlants && cropDetails.companionPlants.length > 0 ? (
-                      <ul className="list-disc pl-5 space-y-2">
-                        {cropDetails.companionPlants.map((plant, index) => (
-                          <li key={index}>{plant}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p>No companion plants listed for this crop.</p>
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Plants to Avoid</h3>
-                    {cropDetails.avoidPlanting && cropDetails.avoidPlanting.length > 0 ? (
-                      <ul className="list-disc pl-5 space-y-2">
-                        {cropDetails.avoidPlanting.map((plant, index) => (
-                          <li key={index}>{plant}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p>No plants to avoid listed for this crop.</p>
-                    )}
-                  </div>
+                  <p>{commonProblemsText}</p>
                 </CardContent>
               </Card>
             </TabsContent>
@@ -314,14 +280,7 @@ export default function CropDetailsPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-6">
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Nutritional Value</h3>
-                    <p>{cropDetails.nutritionalValue}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Culinary Uses</h3>
-                    <p>{cropDetails.culinaryUses}</p>
-                  </div>
+                  <p>{culinaryUsesText}</p>
                 </CardContent>
               </Card>
             </TabsContent>
