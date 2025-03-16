@@ -3,19 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
-import { ArrowLeft, Calendar, Droplets, SproutIcon as Seedling, Sun } from "lucide-react";
+import { ArrowLeft, Calendar, Droplets, SproutIcon as Seedling } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function CropDetailsPage() {
-  // Usamos el hook useParams para obtener los parámetros de la ruta
+  // Obtener parámetros de la ruta
   const params = useParams();
   const searchParams = useSearchParams();
-  const cropName = params?.id; // Se obtiene el nombre del cultivo
-
+  const rawCropName = params?.id;
+  const cropName = rawCropName ? decodeURIComponent(rawCropName) : "";
   const [cropDetails, setCropDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +23,9 @@ export default function CropDetailsPage() {
   const [growingGuideText, setGrowingGuideText] = useState("");
   const [commonProblemsText, setCommonProblemsText] = useState("");
   const [culinaryUsesText, setCulinaryUsesText] = useState("");
+
+  // Estado para la pestaña activa. Por defecto ninguno seleccionado.
+  const [activeTab, setActiveTab] = useState("");
 
   // Parámetros para la navegación de regreso a resultados
   const location = searchParams.get("location") || "San Francisco";
@@ -45,6 +48,22 @@ export default function CropDetailsPage() {
     }
   }
 
+  // Función para manejar el cambio de pestaña
+  async function handleTabChange(tabValue) {
+    setActiveTab(tabValue);
+    // Llama al endpoint solo si aún no se ha cargado el texto para esa categoría
+    if (tabValue === "growing" && !growingGuideText) {
+      const text = await fetchTextData(cropName, 1);
+      setGrowingGuideText(text);
+    } else if (tabValue === "problems" && !commonProblemsText) {
+      const text = await fetchTextData(cropName, 2);
+      setCommonProblemsText(text);
+    } else if (tabValue === "culinary" && !culinaryUsesText) {
+      const text = await fetchTextData(cropName, 3);
+      setCulinaryUsesText(text);
+    }
+  }
+
   useEffect(() => {
     async function fetchCropDetails() {
       try {
@@ -54,8 +73,7 @@ export default function CropDetailsPage() {
           body: JSON.stringify({ crop: cropName })
         });
         const data = await response.json();
-        // Mapear la respuesta de la API (formato JSON) a los campos que usa la UI
-        // Dentro del useEffect, mapea el campo "Image Link"
+        // Mapear la respuesta de la API a los campos que usa la UI
         const mappedData = {
           name: data["Crop Type"] || cropName,
           scientificName: data["Scientific Name"] || "",
@@ -73,18 +91,7 @@ export default function CropDetailsPage() {
           potassium: data["Potassium"] || "N/A",
           imageLink: data["Image Link"]
         };
-
         setCropDetails(mappedData);
-
-        // Realizar fetch a /text para cada categoría y asignar el resultado al estado correspondiente
-        const growingGuide = await fetchTextData(cropName, 1);
-        setGrowingGuideText(growingGuide);
-
-        const commonProblems = await fetchTextData(cropName, 2);
-        setCommonProblemsText(commonProblems);
-
-        const culinaryUses = await fetchTextData(cropName, 3);
-        setCulinaryUsesText(culinaryUses);
       } catch (error) {
         console.error("Error fetching crop details:", error);
       } finally {
@@ -99,7 +106,6 @@ export default function CropDetailsPage() {
   if (loading) {
     return <div>Cargando...</div>;
   }
-
   if (!cropDetails) {
     return <div>Error: No se encontraron detalles para este cultivo.</div>;
   }
@@ -147,8 +153,7 @@ export default function CropDetailsPage() {
                       : "outline"
                   }
                   className="text-sm"
-                >
-                </Badge>
+                />
               </div>
               <p className="text-muted-foreground italic">{cropDetails.scientificName}</p>
               <p className="text-base/relaxed">{cropDetails.description}</p>
@@ -239,13 +244,18 @@ export default function CropDetailsPage() {
             </div>
           </div>
 
-          <Tabs defaultValue="growing" className="w-full">
+          {/* Tabs sin pestaña seleccionada por defecto */}
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="growing">Growing Guide</TabsTrigger>
               <TabsTrigger value="problems">Common Problems</TabsTrigger>
               <TabsTrigger value="culinary">Culinary Uses</TabsTrigger>
             </TabsList>
-            <TabsContent value="growing" className="mt-4">
+          </Tabs>
+
+          {/* Renderizamos el contenido solo si hay una pestaña activa */}
+          {activeTab === "growing" && (
+            <div className="mt-4">
               <Card>
                 <CardHeader>
                   <CardTitle>Growing Guide</CardTitle>
@@ -257,8 +267,10 @@ export default function CropDetailsPage() {
                   <p>{growingGuideText}</p>
                 </CardContent>
               </Card>
-            </TabsContent>
-            <TabsContent value="problems" className="mt-4">
+            </div>
+          )}
+          {activeTab === "problems" && (
+            <div className="mt-4">
               <Card>
                 <CardHeader>
                   <CardTitle>Common Problems</CardTitle>
@@ -270,8 +282,10 @@ export default function CropDetailsPage() {
                   <p>{commonProblemsText}</p>
                 </CardContent>
               </Card>
-            </TabsContent>
-            <TabsContent value="culinary" className="mt-4">
+            </div>
+          )}
+          {activeTab === "culinary" && (
+            <div className="mt-4">
               <Card>
                 <CardHeader>
                   <CardTitle>Culinary Information</CardTitle>
@@ -283,8 +297,8 @@ export default function CropDetailsPage() {
                   <p>{culinaryUsesText}</p>
                 </CardContent>
               </Card>
-            </TabsContent>
-          </Tabs>
+            </div>
+          )}
         </section>
       </main>
     </div>
