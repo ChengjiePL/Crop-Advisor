@@ -3,6 +3,8 @@
 CropAdvisor is a smart farming solution that provides personalized crop recommendations for **LATAM** based on location, planting date, and soil conditions. The application combines a modern Next.js frontend with a powerful Python Flask backend to deliver accurate crop suggestions and detailed growing information.
 
 
+## 🎥 Video Demo
+https://github.com/user-attachments/assets/0d72a803-20ba-4f08-bec8-b9fa4862a5fc
 
 
 
