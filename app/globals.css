@@ -78,7 +78,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: url("/patterns/subtle-field.svg");
+    background-image: "./public/subtle-field.svg";
     background-repeat: repeat;
     background-size: 200px;
     background-attachment: fixed;

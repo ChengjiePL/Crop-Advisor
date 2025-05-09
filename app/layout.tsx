@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/fav.png" sizes="any" />
         <title>CropAdvisor - Smart Farming Solutions</title>
         <meta
           name="description"
