@@ -2,11 +2,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams, useRouter} from "next/navigation";
-import { ArrowLeft, Calendar, Droplets, SproutIcon as Seedling } from "lucide-react";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
+import {
+  ArrowLeft,
+  Calendar,
+  Droplets,
+  SproutIcon as Seedling,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -36,10 +47,12 @@ export default function CropDetailsPage() {
   // Función para hacer fetch a /text con el crop name y la categoría (1, 2 o 3)
   async function fetchTextData(crop, category) {
     try {
-      const response = await fetch("http://localhost:5000/text", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+      const response = await fetch(`${apiUrl}/text`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ crop, category })
+        body: JSON.stringify({ crop, category }),
       });
       const data = await response.json();
       return data.text; // Se asume que la API retorna el texto en la propiedad "text"
@@ -68,10 +81,13 @@ export default function CropDetailsPage() {
   useEffect(() => {
     async function fetchCropDetails() {
       try {
-        const response = await fetch("http://localhost:5000/crop", {
+        const apiUrl =
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+        const response = await fetch(`${apiUrl}/crop`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ crop: cropName })
+          body: JSON.stringify({ crop: cropName }),
         });
         const data = await response.json();
         // Mapear la respuesta de la API a los campos que usa la UI
@@ -90,7 +106,7 @@ export default function CropDetailsPage() {
           moisture: data["Moisture"] || "N/A",
           nitrogen: data["Nitrogen"] || "N/A",
           potassium: data["Potassium"] || "N/A",
-          imageLink: data["Image Link"]
+          imageLink: data["Image Link"],
         };
         setCropDetails(mappedData);
       } catch (error) {
@@ -140,19 +156,23 @@ export default function CropDetailsPage() {
             </div>
             <div className="grid gap-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">{cropDetails.name}</h2>
+                <h2 className="text-3xl font-bold tracking-tight">
+                  {cropDetails.name}
+                </h2>
                 <Badge
                   variant={
                     cropDetails.suitability === "Excellent"
                       ? "default"
                       : cropDetails.suitability === "Very Good"
-                      ? "secondary"
-                      : "outline"
+                        ? "secondary"
+                        : "outline"
                   }
                   className="text-sm"
                 />
               </div>
-              <p className="text-muted-foreground italic">{cropDetails.scientificName}</p>
+              <p className="text-muted-foreground italic">
+                {cropDetails.scientificName}
+              </p>
               <p className="text-base/relaxed">{cropDetails.description}</p>
 
               <div className="grid gap-4 sm:grid-cols-2">
@@ -242,7 +262,11 @@ export default function CropDetailsPage() {
           </div>
 
           {/* Tabs sin pestaña seleccionada por defecto */}
-          <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
+          <Tabs
+            value={activeTab}
+            onValueChange={handleTabChange}
+            className="w-full"
+          >
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="growing">Growing Guide</TabsTrigger>
               <TabsTrigger value="problems">Common Problems</TabsTrigger>
@@ -257,7 +281,8 @@ export default function CropDetailsPage() {
                 <CardHeader>
                   <CardTitle>Growing Guide</CardTitle>
                   <CardDescription>
-                    Everything you need to know about growing {cropDetails.name.toLowerCase()}
+                    Everything you need to know about growing{" "}
+                    {cropDetails.name.toLowerCase()}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-6">
@@ -272,7 +297,8 @@ export default function CropDetailsPage() {
                 <CardHeader>
                   <CardTitle>Common Problems</CardTitle>
                   <CardDescription>
-                    Issues you might encounter when growing {cropDetails.name.toLowerCase()}
+                    Issues you might encounter when growing{" "}
+                    {cropDetails.name.toLowerCase()}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -287,7 +313,8 @@ export default function CropDetailsPage() {
                 <CardHeader>
                   <CardTitle>Culinary Information</CardTitle>
                   <CardDescription>
-                    Nutritional value and culinary uses for {cropDetails.name.toLowerCase()}
+                    Nutritional value and culinary uses for{" "}
+                    {cropDetails.name.toLowerCase()}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-6">
