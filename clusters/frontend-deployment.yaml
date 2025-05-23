@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ./docker-compose.yml --out clusters/
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ./docker-compose.yml --out clusters/
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: frontend
+    spec:
+      containers:
+        - env:
+            - name: NEXT_PUBLIC_API_URL
+              value: http://backend:5000
+          image: frontend
+          name: frontend
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+      restartPolicy: Always

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ./docker-compose.yml --out clusters/
+    kompose.version: 1.36.0 (ae2a39403)
+  labels:
+    io.kompose.service: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ./docker-compose.yml --out clusters/
+        kompose.version: 1.36.0 (ae2a39403)
+      labels:
+        io.kompose.service: backend
+    spec:
+      containers:
+        - env:
+            - name: FLASK_ENV
+              value: development
+          image: backend
+          name: backend
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app
+              name: backend-cm0
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: backend-cm0
+          name: backend-cm0
