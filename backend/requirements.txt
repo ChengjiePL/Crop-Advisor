@@ -19,3 +19,5 @@ seaborn>=0.12.2
 
 # Scientific computation
 scipy>=1.11.1
+
+google-cloud-aiplatform
