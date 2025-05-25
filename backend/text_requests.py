@@ -1,40 +1,46 @@
-import requests
-import json
+import os
+from vertexai.generative_models import GenerativeModel
+import vertexai
 
-def query_azure_openai(crop, num):
+# Configura las credenciales y el proyecto
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(
+    os.path.dirname(__file__), "tidy-bliss-459306-g1-31be53d9d08e.json"
+)
 
-    if(num == 1):
+PROJECT_ID = "tidy-bliss-459306-g1"
+LOCATION = "europe-southwest1"  # Cambia esto a us-central1 para Gemini/Google models
+
+# Inicializa Vertex AI (solo es necesario hacerlo una vez al inicio de tu app)
+vertexai.init(project=PROJECT_ID, location=LOCATION)
+
+
+def query_vertex_ai(crop, num):
+    if num == 1:
         prompt = (
             f"Provide a concise, one-paragraph explanation on the best practices for growing {crop}. "
             "The answer should be direct and plain, without any introductory phrases or extra commentary."
         )
-    elif(num == 2):
+    elif num == 2:
         prompt = (
             f"Provide a concise, one-paragraph overview of the common problems encountered when cultivating {crop}. "
-            f"The answer should be direct and plain, focusing solely on key issues and their solutions, with no extra phrases."
+            "The answer should be direct and plain, focusing solely on key issues and their solutions, with no extra phrases."
         )
-    elif(num == 3):
+    elif num == 3:
         prompt = (
             f"Provide a concise, one-paragraph description of the culinary uses of {crop}. "
-            f"The answer should be direct and plain, listing the main applications without any introductory or extraneous language."
+            "The answer should be direct and plain, listing the main applications without any introductory or extraneous language."
         )
+    else:
+        raise ValueError("Invalid 'num' value. Must be 1, 2, or 3.")
 
-    api_key = "6evUUU8hO6Z13XrWLqupolcAtbxiOdCiw0LBeu2prfMuqEd33BwUJQQJ99BCACYeBjFXJ3w3AAAAACOGQmQt"
-    url = "https://ai-hackathonuabpayretailers082809715538.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-12-01-preview"
-    headers = {
-        "Content-Type": "application/json",
-        "api-key": api_key,
-    }
-    
-    payload = {
-        "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ],
-        "max_tokens": 150,
-        "temperature": 1,
-    }
-    
-    response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status()
-    return response.json()["choices"][0]["message"]["content"]
+    # Crea el modelo Gemini 2.0 Flash
+    model = GenerativeModel("gemini-2.0-flash-001")
+    # Puedes ajustar los parámetros como temperature y max_output_tokens si lo deseas
+    response = model.generate_content(
+        prompt,
+        generation_config={
+            "temperature": 1,
+            "max_output_tokens": 150,
+        },
+    )
+    return response.text
