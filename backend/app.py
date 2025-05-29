@@ -27,12 +27,18 @@ def predict():
     phosphorus = data.get("phosphorus")
 
     city = data.get("city")
-    print()
-    print(city)
-    print()
+
+    if not city:
+        return jsonify({"error": "El campo 'city' es obligatorio."}), 400
+
     # Obtener el mes desde la fecha
     month = int(date.split("-")[1])
     month_day = f"{date.split('-')[1].zfill(2)}-{date.split('-')[2].zfill(2)}"
+
+    try:
+        latitude, longitude = location_requests.getLatLon(city)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 404
 
     latitude, longitude = location_requests.getLatLon(city)
 

@@ -51,7 +51,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://34.175.137.155:5000";
 
       const response = await fetch(`${apiUrl}/predict`, {
         method: "POST",

@@ -47,7 +47,7 @@ export default function CropDetailsPage() {
   // Función para hacer fetch a /text con el crop name y la categoría (1, 2 o 3)
   async function fetchTextData(crop, category) {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://34.175.137.155:5000";
 
       const response = await fetch(`${apiUrl}/text`, {
         method: "POST",
@@ -82,7 +82,7 @@ export default function CropDetailsPage() {
     async function fetchCropDetails() {
       try {
         const apiUrl =
-          process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+          process.env.NEXT_PUBLIC_API_URL || "http://34.175.137.155:5000";
 
         const response = await fetch(`${apiUrl}/crop`, {
           method: "POST",

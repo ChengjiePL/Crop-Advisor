@@ -11,4 +11,5 @@ def getLatLon(city_name):
         lon = float(data[0]["lon"])
         return lat, lon
     else:
-        return None
+        raise ValueError(f"La ciudad '{city_name}' no fue encontrada.")
+
